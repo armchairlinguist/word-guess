@@ -51,9 +51,26 @@ def provide_context(before, after)
   return context
 end
 
+if File.exist?('./config')
+  path = File.read('./config')
+  path.chomp!
+  if File.exist?(path)
+    $words = File.readlines(path)
+  else
+    puts "You configured a word file that doesn't exist. Trying the defaults."
+  end
+end
+
+if File.exist?('/usr/share/dict/words')
+  $words = File.readlines('/usr/share/dict/words')
+elsif File.exist?('/usr/dict/words')
+  $words = File.readlines('/usr/dict/words')
+else
+  puts "No valid config and no default word lists exist. Provide a path to a wordlist file in `config`."
+end
+
 puts "In this game, I choose a word, and you guess my word. When you guess, I'll tell you if your word is before or after mine."
 
-$words = File.readlines('/usr/share/dict/words')
 $current_word = $words.sample.downcase.chomp!
 
 $before_guesses = []

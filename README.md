@@ -5,7 +5,7 @@ The operation of this little script is based on https://hryanjones.com/guess-my-
 It's not exactly the same:
 
 * it doesn't have an easy mode.
-* as written it only works on Mac or any other platform that puts the wordlist in `/usr/share`.
 * it doesn't have the cool way of showing all your guesses, though it does show the two most recent on either side.
 
-I think it's pretty okay, though!
+I think it's pretty okay, though! It does have a basic timer, require your guesses to be words, and let you configure what word list to use. If you don't have `/usr/dict/words` or `/usr/share/dict/words`, you can provide a path to a word list file of similar format in `config`.
+
