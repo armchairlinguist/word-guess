@@ -9,3 +9,4 @@ It's not exactly the same:
 
 I think it's pretty okay, though! It does have a basic timer, require your guesses to be words, and let you configure what word list to use. If you don't have `/usr/dict/words` or `/usr/share/dict/words`, you can provide a path to a word list file of similar format in `config`.
 
+If you get tired of guessing, check out [unexre/word-guess-cheat](https://github.com/unexre/word-guess-cheat).
