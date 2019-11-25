@@ -11,9 +11,14 @@ def guess_loop()
   total = total_guesses($before_guesses, $after_guesses, guess)
 
   if (guess == $current_word)
-    puts "You got it in #{total} guesses! Nice work."
+    time = calculate_duration($start_time, Time.now)
+    puts "You got it in #{total} guesses over #{time} seconds! Nice work."
   elsif (guess == "")
-    puts "Giving up after #{total} guesses? The answer was #{$current_word}. Try again later."
+    time = calculate_duration($start_time, Time.now)
+    puts "Giving up after #{total} guesses and #{time} seconds?\nThe answer was \"#{$current_word}\". Try again later."
+  elsif (!$words.include?("#{guess}\n"))
+    puts "That's not a word. Guess a real word."
+    guess_loop()
   elsif (guess < $current_word)
     print "Try again. "
     $before_guesses << guess
@@ -31,6 +36,10 @@ def total_guesses(before, after, guess)
   return total
 end
 
+def calculate_duration(start_time, end_time)
+  (end_time - start_time).to_i
+end
+
 def provide_context(before, after)
   context = ""
   if (before.length > 0)
@@ -44,10 +53,10 @@ end
 
 puts "In this game, I choose a word, and you guess my word. When you guess, I'll tell you if your word is before or after mine."
 
-words = File.readlines('/usr/share/dict/words')
-$current_word = words.sample.downcase.chomp!
+$words = File.readlines('/usr/share/dict/words')
+$current_word = $words.sample.downcase.chomp!
 
 $before_guesses = []
 $after_guesses = []
-
+$start_time = Time.now
 guess_loop()
